@@ -11,7 +11,7 @@ public abstract class Days
 public interface ISolvable
 {
     
-    public int SolvePart1(List<IParsedInput> input);
-    public int SolvePart2(List<IParsedInput> input);
+    public long SolvePart1(List<IParsedInput> input);
+    public long SolvePart2(List<IParsedInput> input);
 
 }

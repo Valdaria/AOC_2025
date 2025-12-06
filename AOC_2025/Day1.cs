@@ -49,7 +49,7 @@ public class Day1 : Days, ISolvable
         ];
     }
     
-    public int TestPart1()
+    public long TestPart1()
     {
 
         var input = TestInputPart1();
@@ -57,14 +57,14 @@ public class Day1 : Days, ISolvable
         return result;
     }
     
-    public async Task<int> Part1()
+    public async Task<long> Part1()
     {
         var input = await ParseInput();
         var result = SolvePart1(input.Cast<IParsedInput>().ToList());
         return result;
     }
 
-    public int SolvePart1(List<IParsedInput> input)
+    public long SolvePart1(List<IParsedInput> input)
     {
         var result = 0;
         var dialPosition = 50;
@@ -99,7 +99,7 @@ public class Day1 : Days, ISolvable
         ];
     }
     
-    public int TestPart2()
+    public long TestPart2()
     {
         var input = TestInputPart2();
         var result = SolvePart2(input.Cast<IParsedInput>().ToList());
@@ -107,7 +107,7 @@ public class Day1 : Days, ISolvable
     }
     
     
-    public async Task<int> Part2()
+    public async Task<long> Part2()
     {
         var input = await ParseInput();
         var result = SolvePart2(input.Cast<IParsedInput>().ToList());
@@ -115,7 +115,7 @@ public class Day1 : Days, ISolvable
     }
     
 
-    public int SolvePart2(List<IParsedInput> input)
+    public long SolvePart2(List<IParsedInput> input)
     {
         var result = 0;
         var dialPosition = 50;

@@ -20,6 +20,8 @@ var host = Host.CreateDefaultBuilder(args)
 
         // Register your other services here
         services.AddScoped<Day1>();
+        services.AddScoped<Day2>();
+
     })
     .Build();
 
@@ -37,5 +39,12 @@ Console.WriteLine($"Day 1 part 1 test: expected 3, got: {test1_1}");
 
 var test1_2 = day1.TestPart2();
 Console.WriteLine($"Day 1 part 2 test: expected 6, got: {test1_2}");
-var solved1_2 = await day1.Part2();
-Console.WriteLine($"Day 1 part 2 solved: {solved1_2}");
+// var solved1_2 = await day1.Part2();
+// Console.WriteLine($"Day 1 part 2 solved: {solved1_2}");
+
+
+var day2 = host.Services.GetRequiredService<Day2>();
+var test2_1 = day2.TestPart1();
+Console.WriteLine($"Day 2 part 1 test: expected 1227775554, got: {test2_1}");
+var solved2_1 = await day2.Part1();
+Console.WriteLine($"Day 2 part 1 solved: {solved2_1}");
