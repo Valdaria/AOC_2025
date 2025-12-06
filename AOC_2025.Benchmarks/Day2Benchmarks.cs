@@ -4,6 +4,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace AOC_2025.Benchmarks;
 
+// | Method     | Mean     | Error    | StdDev   | Allocated |
+// |----------- |---------:|---------:|---------:|----------:|
+// | SolvePart1 | 11.18 ms | 0.222 ms | 0.237 ms |  48.14 KB |
+
+
 [MemoryDiagnoser]
 [InProcess]
 [InvocationCount(100)]

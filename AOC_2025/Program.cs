@@ -47,4 +47,4 @@ var day2 = host.Services.GetRequiredService<Day2>();
 var test2_1 = day2.TestPart1();
 Console.WriteLine($"Day 2 part 1 test: expected 1227775554, got: {test2_1}");
 var solved2_1 = await day2.Part1();
-Console.WriteLine($"Day 2 part 1 solved: {solved2_1}");
+Console.WriteLine($"Day 2 part 1 solved: {solved2_1}"); // 30599400849

@@ -57,33 +57,38 @@ public class Day2 : Days, ISolvable
         // si le nombre a un nombre de caractères impair > skip
         // on coupe la poire en deux, si gauche = droite => OK
 
-        var result = 0L;
         var input = genericInput.Cast<Range>();
-
-        foreach (var range in input)
+        
+        return input.AsParallel().Sum(range =>
         {
+            var result = 0L;
             var current = range.Start;
             while (current <= range.End)
             {
-                var currentString = current.ToString();
+                // Optimization: Check digit count mathematically
+                // Math.Log10(n) + 1 gives number of digits
+                var digits = (int)Math.Log10(current) + 1;
 
-                if (currentString.Length % 2 == 1)
+                if (digits % 2 == 1)
                 {
                     current++;
                     continue;
                 }
-                var splittedLeft = currentString[..(currentString.Length / 2)];
-                var splittedRight = currentString[((currentString.Length / 2))..];
-                if(splittedLeft.Equals(splittedRight)) 
+
+                // Split number mathematically
+                var divisor = (long)Math.Pow(10, digits / 2);
+                var left = current / divisor;
+                var right = current % divisor;
+
+                if (left == right)
                     result += current;
                 current++;
-            } 
-            
-        }
-        
-        
-        return result;
+            }
 
+            return result;
+        });
+        
+        
     }
 
     public long SolvePart2(List<IParsedInput> input)
