@@ -1,10 +1,12 @@
 ﻿namespace AOC_2025;
 
-public class Day1 : Days
+public class Day1 : Days, ISolvable
 {
+
     public enum Direction { Left, Right }
 
-    public record struct ParsedInput(Direction Direction, int Distance);
+    public record struct ParsedInput(Direction Direction, int Distance)
+        : IParsedInput;
 
     public Day1(IHttpClientFactory httpClientFactory)
     {
@@ -49,25 +51,26 @@ public class Day1 : Days
     
     public int TestPart1()
     {
-        
+
         var input = TestInputPart1();
-        var result = SolvePart1(input);
+        var result = SolvePart1(input.Cast<IParsedInput>().ToList());
         return result;
     }
     
     public async Task<int> Part1()
     {
         var input = await ParseInput();
-        var result = SolvePart1(input);
+        var result = SolvePart1(input.Cast<IParsedInput>().ToList());
         return result;
     }
 
-    public int SolvePart1(List<ParsedInput> input)
+    public int SolvePart1(List<IParsedInput> input)
     {
         var result = 0;
         var dialPosition = 50;
-        foreach (var line in input)
+        foreach (var item in input)
         {
+            var line = (ParsedInput)item;
             dialPosition = line.Direction switch
             {
                 Direction.Left => (int)Mod(dialPosition - line.Distance, 100),
@@ -99,7 +102,7 @@ public class Day1 : Days
     public int TestPart2()
     {
         var input = TestInputPart2();
-        var result = SolvePart2(input);
+        var result = SolvePart2(input.Cast<IParsedInput>().ToList());
         return result;
     }
     
@@ -107,17 +110,18 @@ public class Day1 : Days
     public async Task<int> Part2()
     {
         var input = await ParseInput();
-        var result = SolvePart2(input);
+        var result = SolvePart2(input.Cast<IParsedInput>().ToList());
         return result;
     }
     
 
-    public int SolvePart2(List<ParsedInput> input)
+    public int SolvePart2(List<IParsedInput> input)
     {
         var result = 0;
         var dialPosition = 50;
-        foreach (var line in input)
+        foreach (var item in input)
         {
+            var line = (ParsedInput)item;
             var remaining = line.Distance;
             while (remaining > 0)
             {
@@ -128,7 +132,7 @@ public class Day1 : Days
                 };
                 if(dialPosition < 0) dialPosition = 99;
                 if(dialPosition > 99) dialPosition = 0;
-                
+
                 if (dialPosition == 0)
                 {
                     result++;
@@ -139,5 +143,5 @@ public class Day1 : Days
 
         return result;
     }
-    
+
 }
