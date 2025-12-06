@@ -78,7 +78,66 @@ public class Day1 : Days
 
         return result;
     }
+    
+    public List<ParsedInput> TestInputPart2()
+    {
+        return
+        [
+            new(Direction.Left, 68),
+            new(Direction.Left, 30),
+            new(Direction.Right, 48),
+            new(Direction.Left, 5),
+            new(Direction.Right, 60),
+            new(Direction.Left, 55),
+            new(Direction.Left, 1),
+            new(Direction.Left, 99),
+            new(Direction.Right, 14),
+            new(Direction.Left, 82)
+        ];
+    }
+    
+    public int TestPart2()
+    {
+        var input = TestInputPart2();
+        var result = SolvePart2(input);
+        return result;
+    }
+    
+    
+    public async Task<int> Part2()
+    {
+        var input = await ParseInput();
+        var result = SolvePart2(input);
+        return result;
+    }
+    
 
+    public int SolvePart2(List<ParsedInput> input)
+    {
+        var result = 0;
+        var dialPosition = 50;
+        foreach (var line in input)
+        {
+            var remaining = line.Distance;
+            while (remaining > 0)
+            {
+                dialPosition += line.Direction switch
+                {
+                    Direction.Left => -1,
+                    Direction.Right => 1
+                };
+                if(dialPosition < 0) dialPosition = 99;
+                if(dialPosition > 99) dialPosition = 0;
+                
+                if (dialPosition == 0)
+                {
+                    result++;
+                }
+                remaining--;
+            }
+        }
 
+        return result;
+    }
     
 }

@@ -30,5 +30,10 @@ var host = Host.CreateDefaultBuilder(args)
 var day1 = host.Services.GetRequiredService<Day1>();
 var test1_1 = day1.TestPart1();
 Console.WriteLine($"Day 1 part 1 test: expected 3, got: {test1_1}");
-var solved1_1 = await day1.Part1();
-Console.WriteLine($"Day 1 part 1 solved: {solved1_1}");
+// var solved1_1 = await day1.Part1();
+// Console.WriteLine($"Day 1 part 1 solved: {solved1_1}");
+
+var test1_2 = day1.TestPart2();
+Console.WriteLine($"Day 1 part 2 test: expected 6, got: {test1_2}");
+var solved1_2 = await day1.Part2();
+Console.WriteLine($"Day 1 part 2 solved: {solved1_2}");
