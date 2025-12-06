@@ -1,21 +1,23 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using AOC_2025;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-const string AOC_COOKIE = "53616c7465645f5fecdfb1f23a04fe84c36864aefe4e06f1d426639b68e7ba37788475d1e2b7072f78661663ed429d610258717149fbfc0fd2dd7b7d8dd61534";
-
 // Create host with dependency injection
 var host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
+    .ConfigureServices((context, services) =>
     {
+        var aocCookie = context.Configuration.GetSection("AocSettings:Cookie").Value
+                        ?? throw new InvalidOperationException("AOC Cookie not found in configuration");
+
         services.AddHttpClient("AOC", client =>
         {
             client.BaseAddress = new Uri("https://adventofcode.com/2025/day/");
-            client.DefaultRequestHeaders.Add("Cookie", $"session={AOC_COOKIE}");
+            client.DefaultRequestHeaders.Add("Cookie", $"session={aocCookie}");
         });
-        
+
         // Register your other services here
         services.AddScoped<Day1>();
     })
